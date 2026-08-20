@@ -19,10 +19,10 @@ export default function TabLayout() {
           fontSize: 18,
           color: "#ffffffff",
         },
-        tabBarActiveTintColor: "#007AFF",
-        tabBarInactiveTintColor: "#8E8E93",
+        tabBarActiveTintColor: "#F0F0F0",
+        tabBarInactiveTintColor: "#F0F0F0",
         tabBarStyle: {
-          backgroundColor: "#eff157ff",
+          backgroundColor: "#6e0505ff",
           borderTopWidth: 1,
           borderTopColor: "#F0F0F0",
           height: Platform.OS === "ios" ? 88 : 64,

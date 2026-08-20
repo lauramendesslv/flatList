@@ -90,50 +90,37 @@ const categorias: Categoria[] = [
 
   {
     id: "3",
-    titulo: "Comédia",
+    titulo: "Comédia Romantica",
     filmes: [
       {
         id: "3a",
-        titulo: "Superbad",
+        titulo: "Como perder um homem em 10 dias",
         cor: "#2d132c",
-        image: "https://image.tmdb.org/t/p/w500/ek8e8txUyUwd2BNqj6lFEerZ0Q.jpg",
+        image: "https://play-lh.googleusercontent.com/qfVdhQ0UqzD5rMGyHxRhTs-N5y7mbAphRa45oYgSKspz-znp2tjwHQ3rzJy6n8EfgZ2zKw",
       },
       {
         id: "3b",
-        titulo: "The Grand Budapest",
+        titulo: "10 coisas que eu odeio em você",
         cor: "#1c3334",
-        image: "https://image.tmdb.org/t/p/w500/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+        image: "https://static.wikia.nocookie.net/dublagem/images/7/76/10_Things_I_Hate_About_You.jpg/revision/latest?cb=20231228193109&path-prefix=pt-br",
       },
       {
         id: "3c",
-        titulo: "Knives Out",
+        titulo: "Vestida para casar",
         cor: "#2c003e",
-        image: "https://image.tmdb.org/t/p/w500/p2r9E6L2s7w7Z8sYqYxKqVZKQ.jpg",
-      },
-    ],
-  },
-
-  {
-    id: "4",
-    titulo: "Documentários",
-    filmes: [
-      {
-        id: "4a",
-        titulo: "Free Solo",
-        cor: "#0d0d0d",
-        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrVehflK-pbNr-jEbnpqn5jfN4G8ET01sLL_swbEIXVbmDObExXeRCcvTQbpVs8hc2CG7BJT1mRGJ_K7dFqkczcOyXbnRuvP-cCUJXCBrve2gJgZfY9hsS7bHhWJQzMKp8Z6ig2NQpzHyq/s1600/vestida+para+casar+27+dresses+resenha+blog+tudo+que+motiva.jpg",
       },
       {
-        id: "4b",
-        titulo: "The Social Dilemma",
-        cor: "red",
-        image: "https://image.tmdb.org/t/p/w500/2o7Q3T6v4xZ8R8Y6p6f4Z8N9.jpg",
+        id: "3d",
+        titulo: "Como se fosse a primeira vez",
+        cor: "#2c003e",
+        image: "https://www.querofilme.com.br/images/posters/b/436-como-se-fosse-a-primeira-vez-1.jpg",
       },
       {
-        id: "4c",
-        titulo: "My Octopus Teacher",
-        cor: "green",
-        image: "https://image.tmdb.org/t/p/w500/4g7bY1m7x3P2c6N9V8M4.jpg",
+        id: "3e",
+        titulo: "Esposa de mentirinha",
+        cor: "#2c003e",
+        image: "https://media.fstatic.com/W9UZvN397yjUh566F2flmPAIcJ4=/210x312/smart/media/movies/covers/2011/01/d5f1e3613d0b70ae343e11f1b241a255.jpg",
       },
     ],
   },
@@ -290,17 +277,17 @@ const categorias: Categoria[] = [
         cor: "#0d0d0d",
         image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
       },
-      {
-        id: "9b",
-        titulo: "The Social Dilemma",
-        cor: "red",
-        image: "https://image.tmdb.org/t/p/w500/2o7Q3T6v4xZ8R8Y6p6f4Z8N9.jpg",
+       {
+        id: "9a",
+        titulo: "Free Solo",
+        cor: "#0d0d0d",
+        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
       },
-      {
-        id: "9c",
-        titulo: "My Octopus Teacher",
-        cor: "green",
-        image: "https://image.tmdb.org/t/p/w500/4g7bY1m7x3P2c6N9V8M4.jpg",
+       {
+        id: "9a",
+        titulo: "Free Solo",
+        cor: "#0d0d0d",
+        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
       },
     ],
   },
