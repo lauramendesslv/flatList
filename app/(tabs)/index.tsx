@@ -1,134 +1,416 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
- 
-type Filme = { id: string; titulo: string; cor: string };
-type Categoria = { id: string; titulo: string; filmes: Filme[] };
- 
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from "react-native";
+
+type Filme = {
+  id: string;
+  titulo: string;
+  cor: string;
+  image: string;
+};
+
+type Categoria = {
+  id: string;
+  titulo: string;
+  filmes: Filme[];
+};
+
 const categorias: Categoria[] = [
   {
     id: "1",
     titulo: "Em Alta",
     filmes: [
-      { id: "1a", titulo: "Oppenheimer", cor: "#1a1a2e" },
-      { id: "1b", titulo: "Duna 2", cor: "#16213e" },
-      { id: "1c", titulo: "Barbie", cor: "#0f3460" },
-      { id: "1d", titulo: "Poor Things", cor: "#533483" },
-      { id: "1e", titulo: "Saltburn", cor: "#2b2d42" },
+      {
+        id: "1a",
+        titulo: "Oppenheimer",
+        cor: "#1a1a2e",
+        image: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+      },
+      {
+        id: "1b",
+        titulo: "Duna 2",
+        cor: "#16213e",
+        image: "https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+      },
+      {
+        id: "1c",
+        titulo: "Barbie",
+        cor: "#0f3460",
+        image: "https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
+      },
+      {
+        id: "1d",
+        titulo: "Poor Things",
+        cor: "#533483",
+        image: "https://i.etsystatic.com/25432943/r/il/08e781/5945541949/il_fullxfull.5945541949_a90q.jpg",
+      },
+      {
+        id: "1e",
+        titulo: "Saltburn",
+        cor: "#2b2d42",
+        image: "https://www.prints4u.net/wp-content/uploads/2024/01/Saltburn-001.jpg",
+      },
     ],
   },
+
   {
     id: "2",
     titulo: "Ação",
     filmes: [
-      { id: "2a", titulo: "John Wick 4", cor: "#1b1b2f" },
-      { id: "2b", titulo: "Missão Impossível", cor: "#162447" },
-      { id: "2c", titulo: "Top Gun", cor: "#1f4068" },
-      { id: "2d", titulo: "Mad Max", cor: "#1b262c" },
+      {
+        id: "2a",
+        titulo: "John Wick 4",
+        cor: "#1b1b2f",
+        image: "https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+      },
+      {
+        id: "2b",
+        titulo: "Missão Impossível",
+        cor: "#162447",
+        image: "https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
+      },
+      {
+        id: "2c",
+        titulo: "Top Gun",
+        cor: "#1f4068",
+        image: "https://tse3.mm.bing.net/th/id/OIP.BTJxjZaH6XnOyIrrrF9DqAHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      },
+      {
+        id: "2d",
+        titulo: "Mad Max",
+        cor: "#1b262c",
+        image: "https://image.tmdb.org/t/p/w500/hA2ple9q4qnwxp3hKVNhroipsir.jpg",
+      },
     ],
   },
+
   {
     id: "3",
     titulo: "Comédia",
     filmes: [
-      { id: "3a", titulo: "Superbad", cor: "#2d132c" },
-      { id: "3b", titulo: "The Grand Budapest", cor: "#1c3334" },
-      { id: "3c", titulo: "Knives Out", cor: "#2c003e" },
+      {
+        id: "3a",
+        titulo: "Superbad",
+        cor: "#2d132c",
+        image: "https://image.tmdb.org/t/p/w500/ek8e8txUyUwd2BNqj6lFEerZ0Q.jpg",
+      },
+      {
+        id: "3b",
+        titulo: "The Grand Budapest",
+        cor: "#1c3334",
+        image: "https://image.tmdb.org/t/p/w500/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+      },
+      {
+        id: "3c",
+        titulo: "Knives Out",
+        cor: "#2c003e",
+        image: "https://image.tmdb.org/t/p/w500/p2r9E6L2s7w7Z8sYqYxKqVZKQ.jpg",
+      },
     ],
   },
+
   {
     id: "4",
     titulo: "Documentários",
     filmes: [
-      { id: "4a", titulo: "Free Solo", cor: "#0d0d0d" },
-      { id: "4b", titulo: "The Social Dilemma", cor: "red" },
-      { id: "4c", titulo: "My Octopus Teacher", cor: "green" },
+      {
+        id: "4a",
+        titulo: "Free Solo",
+        cor: "#0d0d0d",
+        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
+      },
+      {
+        id: "4b",
+        titulo: "The Social Dilemma",
+        cor: "red",
+        image: "https://image.tmdb.org/t/p/w500/2o7Q3T6v4xZ8R8Y6p6f4Z8N9.jpg",
+      },
+      {
+        id: "4c",
+        titulo: "My Octopus Teacher",
+        cor: "green",
+        image: "https://image.tmdb.org/t/p/w500/4g7bY1m7x3P2c6N9V8M4.jpg",
+      },
     ],
   },
+
   {
     id: "5",
     titulo: "Terror",
     filmes: [
-      { id: "5a", titulo: "Hereditary", cor: "#200122" },
-      { id: "5b", titulo: "Midsommar", cor: "#190a05" },
-      { id: "5c", titulo: "Get Out", cor: "#0a0a0a" },
+      {
+        id: "5a",
+        titulo: "Hereditary",
+        cor: "#200122",
+        image: "https://www.themoviedb.org/t/p/original/f0RdurRZa5GeovywRENEGgPJf1l.jpg",
+      },
+      {
+        id: "5b",
+        titulo: "Midsommar",
+        cor: "#190a05",
+        image: "https://th.bing.com/th/id/R.f67ac0a8156b469d172fb6cc577569eb?rik=ufmq0NbR71UuLQ&pid=ImgRaw&r=0",
+      },
+      {
+        id: "5c",
+        titulo: "Get Out",
+        cor: "#0a0a0a",
+        image: "https://image.tmdb.org/t/p/w500/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg",
+      },
     ],
   },
- 
+
   {
-    id: "1",
-    titulo: "Em Alta",
+    id: "6",
+    titulo: "Star Wars Series",
     filmes: [
-      { id: "1a", titulo: "Oppenheimer", cor: "#1a1a2e" },
-      { id: "1b", titulo: "Duna 2", cor: "#16213e" },
-      { id: "1c", titulo: "Barbie", cor: "#0f3460" },
-      { id: "1d", titulo: "Poor Things", cor: "#533483" },
-      { id: "1e", titulo: "Saltburn", cor: "#2b2d42" },
+      {
+        id: "6a",
+        titulo: "Episódio IV – Uma Nova Esperança ",
+        cor: "#1a1a2e",
+        image: "https://tse1.mm.bing.net/th/id/OIP.Q87lhwEBdwA-o8rtiDDUNgHaKe?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      },
+      {
+        id: "6b",
+        titulo: "Episódio V – O Império Contra-Ataca",
+        cor: "#16213e",
+        image: "https://m.media-amazon.com/images/M/MV5BY2ViMjFhMDMtNTA4Yi00NGJjLTk0ZTktNGVkZjJjMGY4ZTFkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      },
+      {
+        id: "6c",
+        titulo: "Episódio VI – O Retorno de Jedi",
+        cor: "#0f3460",
+        image: "https://static.wikia.nocookie.net/ptstarwars/images/9/91/O_Retorno_de_Jedi_p%C3%B4ster_EN.png/revision/latest/scale-to-width-down/1200?cb=20140719130223",
+      },
+      {
+        id: "6d",
+        titulo: "Episódio I – A Ameaça Fantasma",
+        cor: "#533483",
+        image: "https://image.tmdb.org/t/p/original/kZZO7e2zlmDszQkla6zeTstOfFq.jpg",
+      },
+      {
+        id: "6e",
+        titulo: "Episódio II – Ataque dos Clones ",
+        cor: "#2b2d42",
+        image: "https://tse3.mm.bing.net/th/id/OIP.euM2v3oJzfddxB1zH0Wt3AHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      },
+      {
+        id: "6f",
+        titulo: "Episódio III – A Vingança dos Sith",
+        cor: "#2b2d42",
+        image: "https://ingresso-a.akamaihd.net/prd/img/movie/star-wars-episodio-iii-a-vinganca-dos-sith-relancamento/afb90754-392a-4d82-b7ce-18b0ef6957dc.webp",
+      },
+      {
+        id: "6g",
+        titulo: "Episódio VII – O Despertar da Força",
+        cor: "#2b2d42",
+        image: "https://images.justwatch.com/poster/249956665/s718/star-wars-o-despertar-da-forca.%7Bformat%7D",
+      },
+      {
+        id: "6h",
+        titulo: "Episódio VIII – Os Últimos Jedi  ",
+        cor: "#2b2d42",
+        image: "https://tse3.mm.bing.net/th/id/OIP.Q8RhGWOjjTFwPalQAGi1QwHaKk?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      },
+      {
+        id: "6h",
+        titulo: "Episódio IX – A Ascensão Skywalker ",
+        cor: "#2b2d42",
+        image: "https://tse4.mm.bing.net/th/id/OIP.iOcEY_6LTLPx9yuf882j9QHaIx?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      },
     ],
   },
+
   {
-    id: "2",
+    id: "7",
     titulo: "Ação",
     filmes: [
-      { id: "2a", titulo: "John Wick 4", cor: "#1b1b2f" },
-      { id: "2b", titulo: "Missão Impossível", cor: "#162447" },
-      { id: "2c", titulo: "Top Gun", cor: "#1f4068" },
-      { id: "2d", titulo: "Mad Max", cor: "#1b262c" },
+      {
+        id: "7a",
+        titulo: "John Wick 4",
+        cor: "#1b1b2f",
+        image: "https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+      },
+      {
+        id: "7b",
+        titulo: "Missão Impossível",
+        cor: "#162447",
+        image: "https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
+      },
+      {
+        id: "7c",
+        titulo: "Top Gun",
+        cor: "#1f4068",
+        image: "https://tse3.mm.bing.net/th/id/OIP.BTJxjZaH6XnOyIrrrF9DqAHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      },
+      {
+        id: "7d",
+        titulo: "Mad Max",
+        cor: "#1b262c",
+        image: "https://image.tmdb.org/t/p/w500/hA2ple9q4qnwxp3hKVNhroipsir.jpg",
+      },
     ],
   },
+
   {
-    id: "3",
+    id: "8",
     titulo: "Comédia",
     filmes: [
-      { id: "3a", titulo: "Superbad", cor: "#2d132c" },
-      { id: "3b", titulo: "The Grand Budapest", cor: "#1c3334" },
-      { id: "3c", titulo: "Knives Out", cor: "#2c003e" },
+      {
+        id: "8a",
+        titulo: "Superbad",
+        cor: "#2d132c",
+        image: "https://image.tmdb.org/t/p/w500/ek8e8txUyUwd2BNqj6lFEerZ0Q.jpg",
+      },
+      {
+        id: "8b",
+        titulo: "The Grand Budapest",
+        cor: "#1c3334",
+        image: "https://image.tmdb.org/t/p/w500/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+      },
+      {
+        id: "8c",
+        titulo: "Knives Out",
+        cor: "#2c003e",
+        image: "https://image.tmdb.org/t/p/w500/p2r9E6L2s7w7Z8sYqYxKqVZKQ.jpg",
+      },
     ],
   },
+
   {
-    id: "4",
+    id: "9",
     titulo: "Documentários",
     filmes: [
-      { id: "4a", titulo: "Free Solo", cor: "#0d0d0d" },
-      { id: "4b", titulo: "The Social Dilemma", cor: "red" },
-      { id: "4c", titulo: "My Octopus Teacher", cor: "green" },
+      {
+        id: "9a",
+        titulo: "Free Solo",
+        cor: "#0d0d0d",
+        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
+      },
+      {
+        id: "9b",
+        titulo: "The Social Dilemma",
+        cor: "red",
+        image: "https://image.tmdb.org/t/p/w500/2o7Q3T6v4xZ8R8Y6p6f4Z8N9.jpg",
+      },
+      {
+        id: "9c",
+        titulo: "My Octopus Teacher",
+        cor: "green",
+        image: "https://image.tmdb.org/t/p/w500/4g7bY1m7x3P2c6N9V8M4.jpg",
+      },
     ],
   },
+
   {
-    id: "5",
+    id: "10",
     titulo: "Terror",
     filmes: [
-      { id: "5a", titulo: "Hereditary", cor: "#200122" },
-      { id: "5b", titulo: "Midsommar", cor: "#190a05" },
-      { id: "5c", titulo: "Get Out", cor: "#0a0a0a" },
+      {
+        id: "10a",
+        titulo: "Hereditary",
+        cor: "#200122",
+        image: "https://www.themoviedb.org/t/p/original/f0RdurRZa5GeovywRENEGgPJf1l.jpg",
+      },
+      {
+        id: "10b",
+        titulo: "Midsommar",
+        cor: "#190a05",
+        image: "https://th.bing.com/th/id/R.f67ac0a8156b469d172fb6cc577569eb?rik=ufmq0NbR71UuLQ&pid=ImgRaw&r=0",
+      },
+      {
+        id: "10c",
+        titulo: "Get Out",
+        cor: "#0a0a0a",
+        image: "https://image.tmdb.org/t/p/w500/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg",
+      },
     ],
   },
 ];
- 
+
 function FilmeCard({ item }: { item: Filme }) {
   return (
-    <View style={[styles.filmeCard, { backgroundColor: item.cor }]}>
-      <Text style={styles.filmeTitulo}>{item.titulo}</Text>
+    <View
+      style={[
+        styles.filmeCard,
+        { backgroundColor: item.cor },
+      ]}
+    >
+      <Image
+        source={{ uri: item.image }}
+        style={styles.imagemFilme}
+        resizeMode="cover"
+      />
+
+      <View style={styles.sombra} />
+
+      <Text style={styles.filmeTitulo}>
+        {item.titulo}
+      </Text>
     </View>
   );
 }
- 
+
 function FilmeCardDestaque({ item }: { item: Filme }) {
   return (
-    <View style={[styles.filmeCardDestaque, { backgroundColor: item.cor }]}>
+    <View
+      style={[
+        styles.filmeCardDestaque,
+        { backgroundColor: item.cor },
+      ]}
+    >
+      <Image
+        source={{ uri: item.image }}
+        style={styles.imagemFilmeDestaque}
+        resizeMode="cover"
+      />
+
+      <View style={styles.sombra} />
+
       <View style={styles.badge}>
-        <Text style={styles.badgeTexto}>🔥 Destaque</Text>
+        <Text style={styles.badgeTexto}>
+          🔥 Destaque
+        </Text>
       </View>
-      <Text style={styles.filmeTitulo}>{item.titulo}</Text>
+
+      <Text style={styles.filmeTitulo}>
+        {item.titulo}
+      </Text>
     </View>
   );
 }
 
 function FilmeCardBanner({ item }: { item: Filme }) {
   return (
-    <View style={[styles.filmeCardBanner, { backgroundColor: item.cor }]}>
+    <View
+      style={[
+        styles.filmeCardBanner,
+        { backgroundColor: item.cor },
+      ]}
+    >
+      <Image
+        source={{ uri: item.image }}
+        style={styles.imagemBanner}
+        resizeMode="cover"
+      />
+
+      <View style={styles.sombra} />
+
       <View style={styles.badge}>
-        <Text style={styles.badgeTexto}>✨ Novo</Text>
+        <Text style={styles.badgeTexto}>
+          ✨ Novo
+        </Text>
       </View>
-      <Text style={[styles.filmeTitulo, styles.filmeTituloCentralizado]}>
+
+      <Text
+        style={[
+          styles.filmeTitulo,
+          styles.filmeTituloCentralizado,
+        ]}
+      >
         {item.titulo}
       </Text>
     </View>
@@ -138,67 +420,81 @@ function FilmeCardBanner({ item }: { item: Filme }) {
 function renderFilmeCard(item: Filme) {
   switch (item.cor) {
     case "red":
-      return <FilmeCardDestaque item={item} />; 
+      return <FilmeCardDestaque item={item} />;
+
     case "green":
-      return <FilmeCardBanner item={item} />;   
+      return <FilmeCardBanner item={item} />;
+
     default:
-      return <FilmeCard item={item} />;         
+      return <FilmeCard item={item} />;
   }
 }
- 
+
 function CategoriaRow({ item }: { item: Categoria }) {
   return (
     <View style={styles.categoriaContainer}>
-      <Text style={styles.categoriaTitulo}>{item.titulo}</Text>
-      {}
+      <Text style={styles.categoriaTitulo}>
+        {item.titulo}
+      </Text>
+
       <FlatList
-        data={item.filmes}              
-        keyExtractor={(filme) => filme.id} 
-        renderItem={({ item: filme }) => renderFilmeCard(filme)} 
-        horizontal={true}               
-        showsHorizontalScrollIndicator={false} 
+        data={item.filmes}
+        keyExtractor={(filme) => filme.id}
+        renderItem={({ item: filme }) =>
+          renderFilmeCard(filme)
+        }
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );
 }
- 
+
 export default function Netflix() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.logo}>N</Text>
       </View>
-      {}
+
       <FlatList
-        data={categorias}              
-        keyExtractor={(cat) => cat.id} 
-        renderItem={({ item }) => <CategoriaRow item={item} />} 
-        showsVerticalScrollIndicator={false} 
-        contentContainerStyle={{ paddingBottom: 80 }} 
+        data={categorias}
+        keyExtractor={(cat) => cat.id}
+        renderItem={({ item }) => (
+          <CategoriaRow item={item} />
+        )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: 80,
+        }}
       />
     </View>
   );
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#141414",
   },
+
   header: {
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
+
   logo: {
     color: "#E50914",
     fontSize: 32,
     fontWeight: "900",
     letterSpacing: 2,
   },
+
   categoriaContainer: {
     marginBottom: 24,
     paddingLeft: 12,
   },
+
   categoriaTitulo: {
     color: "#fff",
     fontSize: 16,
@@ -208,6 +504,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginBottom: 10,
   },
+
   filmeCard: {
     width: 120,
     height: 170,
@@ -217,28 +514,67 @@ const styles = StyleSheet.create({
     padding: 8,
     borderBottomWidth: 3,
     borderBottomColor: "#E50914",
+    overflow: "hidden",
   },
+
   filmeCardDestaque: {
     width: 120,
     height: 170,
-    borderRadius: 50, 
+    borderRadius: 50,
     marginRight: 10,
     justifyContent: "flex-end",
     padding: 8,
     borderBottomWidth: 3,
     borderBottomColor: "#E50914",
+    overflow: "hidden",
   },
+
   filmeCardBanner: {
-    width: 200,       
-    height: 100,      
+    width: 200,
+    height: 100,
     borderRadius: 10,
     marginRight: 10,
-    justifyContent: "center", 
+    justifyContent: "center",
     alignItems: "center",
     padding: 8,
     borderBottomWidth: 3,
     borderBottomColor: "#E50914",
+    overflow: "hidden",
   },
+
+  imagemFilme: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    left: 0,
+    top: 0,
+  },
+
+  imagemFilmeDestaque: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    left: 0,
+    top: 0,
+  },
+
+  imagemBanner: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    left: 0,
+    top: 0,
+  },
+
+  sombra: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60,
+    backgroundColor: "rgba(0,0,0,0.65)",
+  },
+
   badge: {
     position: "absolute",
     top: 8,
@@ -247,20 +583,23 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 4,
     paddingVertical: 2,
+    zIndex: 3,
   },
+
   badgeTexto: {
     color: "#fff",
     fontSize: 9,
     fontWeight: "700",
   },
+
   filmeTituloCentralizado: {
     textAlign: "center",
   },
+
   filmeTitulo: {
     color: "#fff",
     fontSize: 11,
     fontWeight: "600",
+    zIndex: 2,
   },
 });
- 
- 
