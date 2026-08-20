@@ -226,7 +226,7 @@ const categorias: Categoria[] = [
 
   {
     id: "7",
-    titulo: "Ação",
+    titulo: "Açãoes",
     filmes: [
       {
         id: "7a",
