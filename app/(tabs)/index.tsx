@@ -1,24 +1,19 @@
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-} from "react-native";
-
+import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
+ 
 type Filme = {
   id: string;
   titulo: string;
   cor: string;
   image: string;
 };
-
+ 
 type Categoria = {
   id: string;
   titulo: string;
   filmes: Filme[];
 };
-
+ 
 const categorias: Categoria[] = [
   {
     id: "1",
@@ -56,7 +51,7 @@ const categorias: Categoria[] = [
       },
     ],
   },
-
+ 
   {
     id: "2",
     titulo: "Ação",
@@ -87,7 +82,7 @@ const categorias: Categoria[] = [
       },
     ],
   },
-
+ 
   {
     id: "3",
     titulo: "Comédia Romantica",
@@ -124,7 +119,7 @@ const categorias: Categoria[] = [
       },
     ],
   },
-
+ 
   {
     id: "5",
     titulo: "Terror",
@@ -149,14 +144,14 @@ const categorias: Categoria[] = [
       },
     ],
   },
-
+ 
   {
     id: "6",
     titulo: "Star Wars Series",
     filmes: [
       {
         id: "6a",
-        titulo: "Episódio IV – Uma Nova Esperança ",
+        titulo: "Episódio IV – Uma Nova Esperança",
         cor: "#1a1a2e",
         image: "https://tse1.mm.bing.net/th/id/OIP.Q87lhwEBdwA-o8rtiDDUNgHaKe?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
       },
@@ -180,7 +175,7 @@ const categorias: Categoria[] = [
       },
       {
         id: "6e",
-        titulo: "Episódio II – Ataque dos Clones ",
+        titulo: "Episódio II – Ataque dos Clones",
         cor: "#2b2d42",
         image: "https://tse3.mm.bing.net/th/id/OIP.euM2v3oJzfddxB1zH0Wt3AHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
       },
@@ -194,23 +189,23 @@ const categorias: Categoria[] = [
         id: "6g",
         titulo: "Episódio VII – O Despertar da Força",
         cor: "#2b2d42",
-        image: "https://images.justwatch.com/poster/249956665/s718/star-wars-o-despertar-da-forca.%7Bformat%7D",
+        image: "https://images.justwatch.com/poster/249956665/s718/star-wars-o-despertar-da-forca.{format}",
       },
       {
-        id: "6h",
-        titulo: "Episódio VIII – Os Últimos Jedi  ",
+        id: "6h1",
+        titulo: "Episódio VIII – Os Últimos Jedi",
         cor: "#2b2d42",
         image: "https://tse3.mm.bing.net/th/id/OIP.Q8RhGWOjjTFwPalQAGi1QwHaKk?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
       },
       {
-        id: "6h",
-        titulo: "Episódio IX – A Ascensão Skywalker ",
+        id: "6h2",
+        titulo: "Episódio IX – A Ascensão Skywalker",
         cor: "#2b2d42",
         image: "https://tse4.mm.bing.net/th/id/OIP.iOcEY_6LTLPx9yuf882j9QHaIx?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
       },
     ],
   },
-
+ 
   {
     id: "7",
     titulo: "Açãoes",
@@ -241,7 +236,7 @@ const categorias: Categoria[] = [
       },
     ],
   },
-
+ 
   {
     id: "8",
     titulo: "Comédia",
@@ -266,7 +261,7 @@ const categorias: Categoria[] = [
       },
     ],
   },
-
+ 
   {
     id: "9",
     titulo: "Documentários",
@@ -277,21 +272,9 @@ const categorias: Categoria[] = [
         cor: "#0d0d0d",
         image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
       },
-       {
-        id: "9a",
-        titulo: "Free Solo",
-        cor: "#0d0d0d",
-        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
-      },
-       {
-        id: "9a",
-        titulo: "Free Solo",
-        cor: "#0d0d0d",
-        image: "https://image.tmdb.org/t/p/w500/v8cJ1b7yR8Q3H4J9H5J6N4V6Q.jpg",
-      },
     ],
   },
-
+ 
   {
     id: "10",
     titulo: "Terror",
@@ -317,139 +300,115 @@ const categorias: Categoria[] = [
     ],
   },
 ];
-
-function FilmeCard({ item }: { item: Filme }) {
+ 
+type CardProps = {
+  item: Filme;
+  onPress: () => void;
+};
+ 
+function FilmeCard({ item, onPress }: CardProps) {
   return (
-    <View
-      style={[
-        styles.filmeCard,
-        { backgroundColor: item.cor },
-      ]}
-    >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.imagemFilme}
-        resizeMode="cover"
-      />
-
-      <View style={styles.sombra} />
-
-      <Text style={styles.filmeTitulo}>
-        {item.titulo}
-      </Text>
-    </View>
-  );
-}
-
-function FilmeCardDestaque({ item }: { item: Filme }) {
-  return (
-    <View
-      style={[
-        styles.filmeCardDestaque,
-        { backgroundColor: item.cor },
-      ]}
-    >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.imagemFilmeDestaque}
-        resizeMode="cover"
-      />
-
-      <View style={styles.sombra} />
-
-      <View style={styles.badge}>
-        <Text style={styles.badgeTexto}>
-          🔥 Destaque
-        </Text>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <View style={[styles.filmeCard, { backgroundColor: item.cor }]}>
+        <Image source={{ uri: item.image }} style={styles.imagemFilme} resizeMode="cover" />
+ 
+        <View style={styles.sombra} />
+ 
+        <Text style={styles.filmeTitulo}>{item.titulo}</Text>
       </View>
-
-      <Text style={styles.filmeTitulo}>
-        {item.titulo}
-      </Text>
-    </View>
+    </TouchableOpacity>
   );
 }
-
-function FilmeCardBanner({ item }: { item: Filme }) {
+ 
+function FilmeCardDestaque({ item, onPress }: CardProps) {
   return (
-    <View
-      style={[
-        styles.filmeCardBanner,
-        { backgroundColor: item.cor },
-      ]}
-    >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.imagemBanner}
-        resizeMode="cover"
-      />
-
-      <View style={styles.sombra} />
-
-      <View style={styles.badge}>
-        <Text style={styles.badgeTexto}>
-          ✨ Novo
-        </Text>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <View style={[styles.filmeCardDestaque, { backgroundColor: item.cor }]}>
+        <Image source={{ uri: item.image }} style={styles.imagemFilmeDestaque} resizeMode="cover" />
+ 
+        <View style={styles.sombra} />
+ 
+        <View style={styles.badge}>
+          <Text style={styles.badgeTexto}>🔥 Destaque</Text>
+        </View>
+ 
+        <Text style={styles.filmeTitulo}>{item.titulo}</Text>
       </View>
-
-      <Text
-        style={[
-          styles.filmeTitulo,
-          styles.filmeTituloCentralizado,
-        ]}
-      >
-        {item.titulo}
-      </Text>
-    </View>
+    </TouchableOpacity>
   );
 }
-
-function renderFilmeCard(item: Filme) {
+ 
+function FilmeCardBanner({ item, onPress }: CardProps) {
+  return (
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <View style={[styles.filmeCardBanner, { backgroundColor: item.cor }]}>
+        <Image source={{ uri: item.image }} style={styles.imagemBanner} resizeMode="cover" />
+ 
+        <View style={styles.sombra} />
+ 
+        <View style={styles.badge}>
+          <Text style={styles.badgeTexto}>✨ Novo</Text>
+        </View>
+ 
+        <Text style={[styles.filmeTitulo, styles.filmeTituloCentralizado]}>{item.titulo}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+ 
+function renderFilmeCard(item: Filme, onPress: () => void) {
   switch (item.cor) {
     case "red":
-      return <FilmeCardDestaque item={item} />;
-
+      return <FilmeCardDestaque item={item} onPress={onPress} />;
+ 
     case "green":
-      return <FilmeCardBanner item={item} />;
-
+      return <FilmeCardBanner item={item} onPress={onPress} />;
+ 
     default:
-      return <FilmeCard item={item} />;
+      return <FilmeCard item={item} onPress={onPress} />;
   }
 }
-
-function CategoriaRow({ item }: { item: Categoria }) {
+ 
+function CategoriaRow({
+  item,
+  onFilmePress,
+}: {
+  item: Categoria;
+  onFilmePress: (filme: Filme) => void;
+}) {
   return (
     <View style={styles.categoriaContainer}>
-      <Text style={styles.categoriaTitulo}>
-        {item.titulo}
-      </Text>
-
+      <Text style={styles.categoriaTitulo}>{item.titulo}</Text>
+ 
       <FlatList
         data={item.filmes}
         keyExtractor={(filme) => filme.id}
-        renderItem={({ item: filme }) =>
-          renderFilmeCard(filme)
-        }
+        renderItem={({ item: filme }) => renderFilmeCard(filme, () => onFilmePress(filme))}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       />
     </View>
   );
 }
-
+ 
 export default function Netflix() {
+  const router = useRouter();
+ 
+  // O filme.tsx é sempre o mesmo, independente de qual filme for clicado.
+  const handleFilmePress = (_filme: Filme) => {
+    router.push("/filme");
+  };
+ 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.logo}>N</Text>
       </View>
-
+ 
       <FlatList
         data={categorias}
         keyExtractor={(cat) => cat.id}
-        renderItem={({ item }) => (
-          <CategoriaRow item={item} />
-        )}
+        renderItem={({ item }) => <CategoriaRow item={item} onFilmePress={handleFilmePress} />}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: 80,
@@ -458,30 +417,30 @@ export default function Netflix() {
     </View>
   );
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#141414",
   },
-
+ 
   header: {
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-
+ 
   logo: {
     color: "#E50914",
     fontSize: 32,
     fontWeight: "900",
     letterSpacing: 2,
   },
-
+ 
   categoriaContainer: {
     marginBottom: 24,
     paddingLeft: 12,
   },
-
+ 
   categoriaTitulo: {
     color: "#fff",
     fontSize: 16,
@@ -491,7 +450,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     marginBottom: 10,
   },
-
+ 
   filmeCard: {
     width: 120,
     height: 170,
@@ -503,7 +462,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E50914",
     overflow: "hidden",
   },
-
+ 
   filmeCardDestaque: {
     width: 120,
     height: 170,
@@ -515,7 +474,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E50914",
     overflow: "hidden",
   },
-
+ 
   filmeCardBanner: {
     width: 200,
     height: 100,
@@ -528,7 +487,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E50914",
     overflow: "hidden",
   },
-
+ 
   imagemFilme: {
     position: "absolute",
     width: "100%",
@@ -536,7 +495,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-
+ 
   imagemFilmeDestaque: {
     position: "absolute",
     width: "100%",
@@ -544,7 +503,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-
+ 
   imagemBanner: {
     position: "absolute",
     width: "100%",
@@ -552,7 +511,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
   },
-
+ 
   sombra: {
     position: "absolute",
     bottom: 0,
@@ -561,7 +520,7 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "rgba(0,0,0,0.65)",
   },
-
+ 
   badge: {
     position: "absolute",
     top: 8,
@@ -572,17 +531,17 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     zIndex: 3,
   },
-
+ 
   badgeTexto: {
     color: "#fff",
     fontSize: 9,
     fontWeight: "700",
   },
-
+ 
   filmeTituloCentralizado: {
     textAlign: "center",
   },
-
+ 
   filmeTitulo: {
     color: "#fff",
     fontSize: 11,
@@ -590,3 +549,4 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
 });
+ 
