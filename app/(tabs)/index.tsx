@@ -2,22 +2,15 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
   Image,
 } from "react-native";
+import { useRouter } from "expo-router";
+import type { Href } from "expo-router";
 
-type Filme = {
-  id: string;
-  titulo: string;
-  cor: string;
-  image: string;
-};
-
-type Categoria = {
-  id: string;
-  titulo: string;
-  filmes: Filme[];
-};
+import CardCategorias from "../components/CardCategorias";
+import type { Categoria, Filme } from "../components/DadosDosFilmes";
 
 const categorias: Categoria[] = [
   {
@@ -318,126 +311,135 @@ const categorias: Categoria[] = [
   },
 ];
 
-function FilmeCard({ item }: { item: Filme }) {
+function FilmeCard({ item, onPress }: { item: Filme; onPress: (filme: Filme) => void }) {
   return (
-    <View
-      style={[
-        styles.filmeCard,
-        { backgroundColor: item.cor },
-      ]}
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => onPress(item)}
     >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.imagemFilme}
-        resizeMode="cover"
-      />
-
-      <View style={styles.sombra} />
-
-      <Text style={styles.filmeTitulo}>
-        {item.titulo}
-      </Text>
-    </View>
-  );
-}
-
-function FilmeCardDestaque({ item }: { item: Filme }) {
-  return (
-    <View
-      style={[
-        styles.filmeCardDestaque,
-        { backgroundColor: item.cor },
-      ]}
-    >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.imagemFilmeDestaque}
-        resizeMode="cover"
-      />
-
-      <View style={styles.sombra} />
-
-      <View style={styles.badge}>
-        <Text style={styles.badgeTexto}>
-          🔥 Destaque
-        </Text>
-      </View>
-
-      <Text style={styles.filmeTitulo}>
-        {item.titulo}
-      </Text>
-    </View>
-  );
-}
-
-function FilmeCardBanner({ item }: { item: Filme }) {
-  return (
-    <View
-      style={[
-        styles.filmeCardBanner,
-        { backgroundColor: item.cor },
-      ]}
-    >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.imagemBanner}
-        resizeMode="cover"
-      />
-
-      <View style={styles.sombra} />
-
-      <View style={styles.badge}>
-        <Text style={styles.badgeTexto}>
-          ✨ Novo
-        </Text>
-      </View>
-
-      <Text
+      <View
         style={[
-          styles.filmeTitulo,
-          styles.filmeTituloCentralizado,
+          styles.filmeCard,
+          { backgroundColor: item.cor },
         ]}
       >
-        {item.titulo}
-      </Text>
-    </View>
+        <Image
+          source={{ uri: item.image }}
+          style={styles.imagemFilme}
+          resizeMode="cover"
+        />
+
+        <View style={styles.sombra} />
+
+        <Text style={styles.filmeTitulo}>
+          {item.titulo}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
-function renderFilmeCard(item: Filme) {
+function FilmeCardDestaque({ item, onPress }: { item: Filme; onPress: (filme: Filme) => void }) {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => onPress(item)}
+    >
+      <View
+        style={[
+          styles.filmeCardDestaque,
+          { backgroundColor: item.cor },
+        ]}
+      >
+        <Image
+          source={{ uri: item.image }}
+          style={styles.imagemFilmeDestaque}
+          resizeMode="cover"
+        />
+
+        <View style={styles.sombra} />
+
+        <View style={styles.badge}>
+          <Text style={styles.badgeTexto}>
+            🔥 Destaque
+          </Text>
+        </View>
+
+        <Text style={styles.filmeTitulo}>
+          {item.titulo}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+function FilmeCardBanner({ item, onPress }: { item: Filme; onPress: (filme: Filme) => void }) {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => onPress(item)}
+    >
+      <View
+        style={[
+          styles.filmeCardBanner,
+          { backgroundColor: item.cor },
+        ]}
+      >
+        <Image
+          source={{ uri: item.image }}
+          style={styles.imagemBanner}
+          resizeMode="cover"
+        />
+
+        <View style={styles.sombra} />
+
+        <View style={styles.badge}>
+          <Text style={styles.badgeTexto}>
+            ✨ Novo
+          </Text>
+        </View>
+
+        <Text
+          style={[
+            styles.filmeTitulo,
+            styles.filmeTituloCentralizado,
+          ]}
+        >
+          {item.titulo}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+function renderFilmeCard(item: Filme, onPress: (filme: Filme) => void) {
   switch (item.cor) {
     case "red":
-      return <FilmeCardDestaque item={item} />;
+      return <FilmeCardDestaque item={item} onPress={onPress} />;
 
     case "green":
-      return <FilmeCardBanner item={item} />;
+      return <FilmeCardBanner item={item} onPress={onPress} />;
 
     default:
-      return <FilmeCard item={item} />;
+      return <FilmeCard item={item} onPress={onPress} />;
   }
 }
 
-function CategoriaRow({ item }: { item: Categoria }) {
-  return (
-    <View style={styles.categoriaContainer}>
-      <Text style={styles.categoriaTitulo}>
-        {item.titulo}
-      </Text>
-
-      <FlatList
-        data={item.filmes}
-        keyExtractor={(filme) => filme.id}
-        renderItem={({ item: filme }) =>
-          renderFilmeCard(filme)
-        }
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-      />
-    </View>
-  );
-}
-
 export default function Netflix() {
+  const router = useRouter();
+
+  function abrirFilme(filme: Filme) {
+    router.push({
+      pathname: "/filme/[id]",
+      params: {
+        id: filme.id,
+        titulo: filme.titulo,
+        image: filme.image,
+        cor: filme.cor,
+      },
+    } as unknown as Href);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -448,7 +450,10 @@ export default function Netflix() {
         data={categorias}
         keyExtractor={(cat) => cat.id}
         renderItem={({ item }) => (
-          <CategoriaRow item={item} />
+          <CardCategorias
+            categoria={item}
+            renderFilmeCard={(filme) => renderFilmeCard(filme, abrirFilme)}
+          />
         )}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
